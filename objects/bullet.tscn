@@ -8,7 +8,7 @@
 custom_solver_bias = 0.0
 radius = 6.08276
 
-[node name="bullet" type="RigidBody2D"]
+[node name="bullet" type="RigidBody2D" index="0"]
 
 input_pickable = false
 collision_layer = 1
@@ -20,7 +20,7 @@ bounce = 0.0
 gravity_scale = 0.0
 custom_integrator = false
 continuous_cd = 2
-contacts_reported = 0
+contacts_reported = 1
 contact_monitor = true
 sleeping = false
 can_sleep = true
@@ -29,7 +29,7 @@ linear_damp = -1.0
 angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 1 )
-_sections_unfolded = [ "Angular", "Applied Forces", "Linear", "Material" ]
+_sections_unfolded = [ "Angular", "Applied Forces", "Collision", "Linear", "Material" ]
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 

@@ -1,11 +1,16 @@
 extends RigidBody2D
 
+var damage
+
 func _ready():
+	randomize()
+	damage = randi() % 3 + 1
 	add_collision_exception_with(self)
 
 func _on_bullet_body_entered(body):
-		if body.has_method("hit_by_bullet"):
-			body.call("hit_by_bullet")
+		if body.has_method("take_damage"):
+			body.take_damage(damage)
+			queue_free()
 		else:
 			queue_free()
 	
