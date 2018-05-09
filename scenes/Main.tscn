@@ -34,11 +34,9 @@ position = Vector2( 512, 320 )
 [node name="enemy" parent="." index="2" instance=ExtResource( 3 )]
 
 position = Vector2( 64, 64 )
-speed = 105
 
 [node name="enemy2" parent="." index="3" instance=ExtResource( 3 )]
 
 position = Vector2( 960, 224 )
-speed = 105
 
 
