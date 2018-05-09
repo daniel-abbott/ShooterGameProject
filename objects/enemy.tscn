@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://objects/player.gd" type="Script" id=1]
-[ext_resource path="res://sprites/player.png" type="Texture" id=2]
+[ext_resource path="res://objects/enemy.gd" type="Script" id=1]
+[ext_resource path="res://sprites/enemy.png" type="Texture" id=2]
 
 [sub_resource type="SpriteFrames" id=1]
 
@@ -15,9 +15,9 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 15.5485, 15.532 )
+extents = Vector2( 16.4752, 16.1748 )
 
-[node name="Player" type="KinematicBody2D" index="0"]
+[node name="enemy" type="KinematicBody2D"]
 
 input_pickable = false
 collision_layer = 1
@@ -27,22 +27,15 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
-speed = 110
-deadzone = 0.4
+speed = 100
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="." index="0"]
 
 frames = SubResource( 1 )
 animation = "default"
 
-[node name="muzzle" type="Position2D" parent="AnimatedSprite" index="0"]
-
-position = Vector2( 17, 0 )
-_sections_unfolded = [ "Transform" ]
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
-visible = false
 shape = SubResource( 2 )
 
 

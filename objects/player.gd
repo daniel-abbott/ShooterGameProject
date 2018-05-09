@@ -1,7 +1,8 @@
 extends KinematicBody2D
 
-export (int) var speed = 250
+export (int) var speed = 110
 export (float) var deadzone = 0.4
+const BULLET_VELOCITY = 50
 
 func player_movement():
 	var velocity = Vector2(Input.get_joy_axis(0, JOY_ANALOG_LX), Input.get_joy_axis(0, JOY_ANALOG_LY))
@@ -33,10 +34,14 @@ func player_movement():
 	
 	move_and_slide(velocity)
 
-func player_weapon():
-	if Input.is_action_pressed("fire"):
-		print("Fire button pressed!")
+func player_weapon(delta):
+	if Input.is_action_just_pressed("fire"):
+		var bullet = preload("res://objects/bullet.tscn").instance()
+		bullet.position = $AnimatedSprite/muzzle.global_position
+		bullet.linear_velocity = Vector2($AnimatedSprite/muzzle.position.x * BULLET_VELOCITY, 0).rotated($AnimatedSprite/muzzle.global_rotation)
+		bullet.add_collision_exception_with(self)
+		get_parent().add_child(bullet)
 
 func _physics_process(delta):
 	player_movement()
-	player_weapon()
+	player_weapon(delta)
