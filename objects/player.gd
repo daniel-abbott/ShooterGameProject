@@ -2,7 +2,9 @@ extends KinematicBody2D
 
 export (int) var speed = 110
 export (float) var deadzone = 0.4
-const BULLET_VELOCITY = 50
+const BULLET_VELOCITY = 30
+const BASE_FIRE_RATE = 0.1
+var fire_rate = BASE_FIRE_RATE
 
 func player_movement():
 	var velocity = Vector2(Input.get_joy_axis(0, JOY_ANALOG_LX), Input.get_joy_axis(0, JOY_ANALOG_LY))
@@ -35,12 +37,18 @@ func player_movement():
 	move_and_slide(velocity)
 
 func player_weapon(delta):
-	if Input.is_action_just_pressed("fire"):
-		var bullet = preload("res://objects/bullet.tscn").instance()
-		bullet.position = $AnimatedSprite/muzzle.global_position
-		bullet.linear_velocity = Vector2($AnimatedSprite/muzzle.position.x * BULLET_VELOCITY, 0).rotated($AnimatedSprite/muzzle.global_rotation)
-		bullet.add_collision_exception_with(self)
-		get_parent().add_child(bullet)
+	if Input.is_action_pressed("fire"):
+		fire_rate -= delta
+		if fire_rate == BASE_FIRE_RATE - delta:
+			var bullet = preload("res://objects/bullet.tscn").instance()
+			bullet.position = $AnimatedSprite/muzzle.global_position
+			bullet.linear_velocity = Vector2($AnimatedSprite/muzzle.position.x * BULLET_VELOCITY, 0).rotated($AnimatedSprite/muzzle.global_rotation)
+			bullet.add_collision_exception_with(self)
+			get_parent().add_child(bullet)
+		elif fire_rate <= 0:
+			fire_rate = BASE_FIRE_RATE
+	else:
+		fire_rate = BASE_FIRE_RATE
 
 func _physics_process(delta):
 	player_movement()
