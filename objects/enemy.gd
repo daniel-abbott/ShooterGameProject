@@ -4,7 +4,7 @@ const STATE_IDLE = 0
 const STATE_MOVING = 1
 const STATE_DEAD = 2
 
-export (int) var speed = 105
+export (int) var speed = 150
 export (int) var health = 10
 var target = Vector2()
 var velocity = Vector2()

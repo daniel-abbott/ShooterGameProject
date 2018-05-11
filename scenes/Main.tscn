@@ -4,7 +4,7 @@
 [ext_resource path="res://objects/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://objects/enemy.tscn" type="PackedScene" id=3]
 
-[node name="Root" type="Node2D"]
+[node name="Root" type="Node2D" index="0"]
 
 [node name="TileMap" type="TileMap" parent="." index="0"]
 
@@ -34,17 +34,21 @@ position = Vector2( 512, 320 )
 [node name="enemy" parent="." index="2" instance=ExtResource( 3 )]
 
 position = Vector2( 64, 64 )
+speed = 150
 
 [node name="enemy2" parent="." index="3" instance=ExtResource( 3 )]
 
 position = Vector2( 960, 224 )
+speed = 150
 
 [node name="enemy3" parent="." index="4" instance=ExtResource( 3 )]
 
 position = Vector2( 1600, 544 )
+speed = 150
 
 [node name="enemy4" parent="." index="5" instance=ExtResource( 3 )]
 
 position = Vector2( 256, 1152 )
+speed = 150
 
 

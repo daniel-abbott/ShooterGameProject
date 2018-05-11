@@ -5,15 +5,48 @@ export (float) var deadzone = 0.4
 const BULLET_VELOCITY = 30
 const BASE_FIRE_RATE = 0.1
 var fire_rate = BASE_FIRE_RATE
+var aiming = false
+var beam_color = "00000000"
+var firing = false
+var velocity = Vector2()
+var direction = Vector2()
+var in_menus = false
+
+func set_processes(value):
+	set_process(value)
+	set_physics_process(value)
+
+func _ready():
+	set_processes(true)
+	set_process_unhandled_input(true)
+	
+func _unhandled_input(event):
+	if event.is_action_pressed("ui_cancel") && !event.is_echo():
+		in_menus = !in_menus
+		if in_menus:
+			set_processes(false)
+		else:
+			set_processes(true)
+		
+func _draw():
+	if aiming:
+		beam_color = "88ff0000"
+		draw_line($AnimatedSprite/muzzle.position, Vector2(1000, 0), beam_color, 1.5, false)
+	else:
+		beam_color = "00000000"
 
 func player_movement():
-	var velocity = Vector2(Input.get_joy_axis(0, JOY_ANALOG_LX), Input.get_joy_axis(0, JOY_ANALOG_LY))
-	var direction = Vector2(Input.get_joy_axis(0, JOY_ANALOG_RX), Input.get_joy_axis(0, JOY_ANALOG_RY))
+	velocity = Vector2(Input.get_joy_axis(0, JOY_ANALOG_LX), Input.get_joy_axis(0, JOY_ANALOG_LY))
+	direction = Vector2(Input.get_joy_axis(0, JOY_ANALOG_RX), Input.get_joy_axis(0, JOY_ANALOG_RY))
 	
 	if direction.length() > deadzone:
+		aiming = true
 		look_at(direction + position)
 	elif velocity.length() > deadzone && direction.length() < deadzone:
+		aiming = false
 		look_at(velocity + position)
+	else:
+		aiming = false
 	
 	# TODO: convert keyboard controls to global axis
 	if Input.is_action_pressed("move_right"):
@@ -51,5 +84,6 @@ func player_weapon(delta):
 		fire_rate = BASE_FIRE_RATE
 
 func _physics_process(delta):
+	update()
 	player_movement()
 	player_weapon(delta)
