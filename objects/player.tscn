@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://objects/player.gd" type="Script" id=1]
 [ext_resource path="res://sprites/player.png" type="Texture" id=2]
+[ext_resource path="res://sprites/light.png" type="Texture" id=3]
 
 [sub_resource type="SpriteFrames" id=1]
 
@@ -17,7 +18,7 @@ animations = [ {
 custom_solver_bias = 0.0
 extents = Vector2( 15.5485, 15.532 )
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" index="0"]
 
 input_pickable = false
 collision_layer = 1
@@ -29,7 +30,7 @@ __meta__ = {
 "_edit_group_": true
 }
 speed = 110
-deadzone = 0.4
+deadzone = 0.3
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="." index="0"]
 
@@ -55,19 +56,45 @@ limit_left = -10000000
 limit_top = -10000000
 limit_right = 10000000
 limit_bottom = 10000000
-limit_smoothed = false
+limit_smoothed = true
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 smoothing_enabled = true
-smoothing_speed = 3.0
+smoothing_speed = 1.0
 offset_v = 0.0
 offset_h = 0.0
-drag_margin_left = 0.05
-drag_margin_top = 0.05
-drag_margin_right = 0.05
-drag_margin_bottom = 0.05
+drag_margin_left = 0.03
+drag_margin_top = 0.02
+drag_margin_right = 0.03
+drag_margin_bottom = 0.02
 editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
+_sections_unfolded = [ "Drag Margin", "Smoothing" ]
+
+[node name="Light2D" type="Light2D" parent="." index="3"]
+
+enabled = true
+editor_only = false
+texture = ExtResource( 3 )
+offset = Vector2( 0, 0 )
+texture_scale = 3.0
+color = Color( 1, 1, 1, 1 )
+energy = 1.0
+mode = 3
+range_height = 0.0
+range_z_min = -1024
+range_z_max = 1024
+range_layer_min = 0
+range_layer_max = 0
+range_item_cull_mask = 1
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 0 )
+shadow_buffer_size = 512
+shadow_gradient_length = 4.0
+shadow_filter = 5
+shadow_filter_smooth = 0.0
+shadow_item_cull_mask = 1
+_sections_unfolded = [ "Range", "Shadow" ]
 
 

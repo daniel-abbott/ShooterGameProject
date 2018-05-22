@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 export (int) var speed = 110
-export (float) var deadzone = 0.4
+export (float) var deadzone = 0.3
 const BULLET_VELOCITY = 30
 const BASE_FIRE_RATE = 0.1
 var fire_rate = BASE_FIRE_RATE
@@ -42,11 +42,13 @@ func player_movement():
 	if direction.length() > deadzone:
 		aiming = true
 		look_at(direction + position)
+		$Camera2D.offset = direction * 50
 	elif velocity.length() > deadzone && direction.length() < deadzone:
 		aiming = false
 		look_at(velocity + position)
 	else:
 		aiming = false
+		$Camera2D.offset = Vector2(0, 0)
 	
 	# TODO: convert keyboard controls to global axis
 	if Input.is_action_pressed("move_right"):
@@ -76,6 +78,7 @@ func player_weapon(delta):
 			var bullet = preload("res://objects/bullet.tscn").instance()
 			bullet.position = $AnimatedSprite/muzzle.global_position
 			bullet.linear_velocity = Vector2($AnimatedSprite/muzzle.position.x * BULLET_VELOCITY, 0).rotated($AnimatedSprite/muzzle.global_rotation)
+			bullet.rotation = self.rotation
 			bullet.add_collision_exception_with(self)
 			get_parent().add_child(bullet)
 		elif fire_rate <= 0:
@@ -84,6 +87,6 @@ func player_weapon(delta):
 		fire_rate = BASE_FIRE_RATE
 
 func _physics_process(delta):
-	update()
+	update() #updates canvas drawing, in this case the laser sight
 	player_movement()
 	player_weapon(delta)

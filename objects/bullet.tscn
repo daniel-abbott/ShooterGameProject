@@ -3,10 +3,11 @@
 [ext_resource path="res://objects/bullet.gd" type="Script" id=1]
 [ext_resource path="res://sprites/bullet.png" type="Texture" id=2]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CapsuleShape2D" id=1]
 
 custom_solver_bias = 0.0
-radius = 6.08276
+radius = 2.0
+height = 12.0
 
 [node name="bullet" type="RigidBody2D" index="0"]
 
@@ -29,16 +30,19 @@ linear_damp = -1.0
 angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 1 )
-_sections_unfolded = [ "Angular", "Applied Forces", "Collision", "Linear", "Material" ]
+_sections_unfolded = [ "Angular", "Applied Forces", "Collision", "Linear", "Material", "Transform" ]
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
+rotation = 1.5708
 texture = ExtResource( 2 )
-_sections_unfolded = [ "Offset" ]
+_sections_unfolded = [ "Offset", "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
+rotation = 1.5708
 shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="Timer" type="Timer" parent="." index="2"]
 

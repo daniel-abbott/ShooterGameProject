@@ -42,5 +42,6 @@ polygon = PoolVector2Array( -18, 17, -18, -17, 16, -17, 16, 17 )
 
 occluder = SubResource( 1 )
 light_mask = 1
+_sections_unfolded = [ "Visibility" ]
 
 
