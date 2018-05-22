@@ -9,7 +9,7 @@ closed = true
 cull_mode = 0
 polygon = PoolVector2Array( -16, -16, -16, 16, 16, 16, 16, -16 )
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" index="0"]
 
 [node name="testfloor" type="Sprite" parent="." index="0"]
 
@@ -40,6 +40,7 @@ polygon = PoolVector2Array( -18, 17, -18, -17, 16, -17, 16, 17 )
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="testwall" index="1"]
 
+show_behind_parent = true
 occluder = SubResource( 1 )
 light_mask = 1
 _sections_unfolded = [ "Visibility" ]

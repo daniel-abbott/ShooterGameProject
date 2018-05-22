@@ -5,7 +5,7 @@
 [ext_resource path="res://objects/enemy.tscn" type="PackedScene" id=3]
 [ext_resource path="res://sprites/light.png" type="Texture" id=4]
 
-[node name="Root" type="Node2D"]
+[node name="Root" type="Node2D" index="0"]
 
 _sections_unfolded = [ "Visibility" ]
 
@@ -39,7 +39,6 @@ _sections_unfolded = [ "Cell", "Visibility" ]
 
 position = Vector2( 512, 320 )
 _sections_unfolded = [ "Visibility", "Z Index", "collision" ]
-deadzone = 0.3
 
 [node name="enemy" parent="." index="3" instance=ExtResource( 3 )]
 
