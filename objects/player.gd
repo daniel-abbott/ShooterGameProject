@@ -46,6 +46,7 @@ func player_movement():
 	elif velocity.length() > deadzone && direction.length() < deadzone:
 		aiming = false
 		look_at(velocity + position)
+		$Camera2D.offset = Vector2(0, 0)
 	else:
 		aiming = false
 		$Camera2D.offset = Vector2(0, 0)
