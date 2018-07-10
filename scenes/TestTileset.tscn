@@ -40,9 +40,8 @@ polygon = PoolVector2Array( -18, 17, -18, -17, 16, -17, 16, 17 )
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="testwall" index="1"]
 
-show_behind_parent = true
 occluder = SubResource( 1 )
 light_mask = 1
-_sections_unfolded = [ "Visibility" ]
+_sections_unfolded = [ "Visibility", "Z Index" ]
 
 
