@@ -10,3 +10,8 @@ Best played with a controller, as this is a twin-stick shooter. Mouse+keyboard c
 * Aim - Left analog stick
 * Fire - Right trigger
 * Debug Console - `~` key (currently doesn't offer much)
+
+## Features
+* Top-down line-of-sight system (using shadowmaps).
+* Colored level lighting
+* More info to come
