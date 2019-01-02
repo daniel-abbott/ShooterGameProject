@@ -33,7 +33,7 @@ func _unhandled_input(event):
 func _draw():
 	if aiming:
 		beam_color = "88ff0000"
-		draw_line($muzzle.position, Vector2(1000, 0), beam_color, 1.5, false)
+		draw_line($muzzle.position, Vector2(1000, 0), beam_color, 1, true)
 	else:
 		beam_color = "00000000"
 
