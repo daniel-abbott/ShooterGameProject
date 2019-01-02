@@ -36,7 +36,7 @@ func _init():
   })
 
   Console.register('version', {
-    'description': 'Shows engine vesion',
+    'description': 'Shows engine version',
     'target': self
   })
 
