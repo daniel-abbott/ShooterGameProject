@@ -31,7 +31,7 @@ func _unhandled_input(event):
 func _draw():
 	if aiming:
 		beam_color = "88ff0000"
-		draw_line($AnimatedSprite/muzzle.position, Vector2(1000, 0), beam_color, 1.5, false)
+		draw_line($muzzle.position, Vector2(1000, 0), beam_color, 1.5, false)
 	else:
 		beam_color = "00000000"
 
@@ -67,8 +67,10 @@ func player_movement():
 		
 	if velocity.length() > deadzone:
 		velocity = velocity.normalized() * speed
+		$AnimatedSprite.play("Walking")
 	else:
 		velocity = Vector2()
+		$AnimatedSprite.play("Idle")
 	
 	move_and_slide(velocity)
 
@@ -77,8 +79,8 @@ func player_weapon(delta):
 		fire_rate -= delta
 		if fire_rate == BASE_FIRE_RATE - delta:
 			var bullet = preload("res://objects/bullet.tscn").instance()
-			bullet.position = $AnimatedSprite/muzzle.global_position
-			bullet.linear_velocity = Vector2($AnimatedSprite/muzzle.position.x * BULLET_VELOCITY, 0).rotated($AnimatedSprite/muzzle.global_rotation)
+			bullet.position = $muzzle.global_position
+			bullet.linear_velocity = Vector2(0, -$muzzle.position.x * BULLET_VELOCITY).rotated($muzzle.global_rotation)
 			bullet.rotation = self.rotation
 			bullet.add_collision_exception_with(self)
 			get_parent().add_child(bullet)

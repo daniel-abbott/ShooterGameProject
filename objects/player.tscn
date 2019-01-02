@@ -1,24 +1,32 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://objects/player.gd" type="Script" id=1]
-[ext_resource path="res://sprites/player.png" type="Texture" id=2]
-[ext_resource path="res://sprites/light.png" type="Texture" id=3]
+[ext_resource path="res://sprites/player/TopDownPixelCharacter0000.png" type="Texture" id=2]
+[ext_resource path="res://sprites/player/TopDownPixelCharacter0001.png" type="Texture" id=3]
+[ext_resource path="res://sprites/player/TopDownPixelCharacter0002.png" type="Texture" id=4]
+[ext_resource path="res://sprites/player/TopDownPixelCharacter0003.png" type="Texture" id=5]
+[ext_resource path="res://sprites/light.png" type="Texture" id=6]
 
 [sub_resource type="SpriteFrames" id=1]
 
 animations = [ {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
-"name": "default",
+"name": "Idle",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "Walking",
+"speed": 6.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 15.5485, 15.532 )
+radius = 16.0
 
-[node name="Player" type="KinematicBody2D" index="0"]
+[node name="Player" type="KinematicBody2D"]
 
 input_pickable = false
 collision_layer = 1
@@ -34,12 +42,10 @@ deadzone = 0.3
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="." index="0"]
 
+rotation = 1.5708
+scale = Vector2( 4, 4 )
 frames = SubResource( 1 )
-animation = "default"
-
-[node name="muzzle" type="Position2D" parent="AnimatedSprite" index="0"]
-
-position = Vector2( 17, 0 )
+animation = "Idle"
 _sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
@@ -51,7 +57,7 @@ shape = SubResource( 2 )
 anchor_mode = 1
 rotating = false
 current = true
-zoom = Vector2( 1, 1 )
+zoom = Vector2( 2, 2 )
 limit_left = -10000000
 limit_top = -10000000
 limit_right = 10000000
@@ -60,7 +66,7 @@ limit_smoothed = true
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 smoothing_enabled = true
-smoothing_speed = 1.0
+smoothing_speed = 2.0
 offset_v = 0.0
 offset_h = 0.0
 drag_margin_left = 0.03
@@ -70,13 +76,13 @@ drag_margin_bottom = 0.02
 editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
-_sections_unfolded = [ "Drag Margin", "Smoothing" ]
+_sections_unfolded = [ "Drag Margin", "Limit", "Smoothing", "Visibility" ]
 
 [node name="Light2D" type="Light2D" parent="Camera2D" index="0"]
 
 enabled = true
 editor_only = false
-texture = ExtResource( 3 )
+texture = ExtResource( 6 )
 offset = Vector2( 0, 0 )
 texture_scale = 3.0
 color = Color( 1, 1, 1, 1 )
@@ -96,5 +102,11 @@ shadow_filter = 5
 shadow_filter_smooth = 1.0
 shadow_item_cull_mask = 1
 _sections_unfolded = [ "Range", "Shadow" ]
+
+[node name="muzzle" type="Position2D" parent="." index="3"]
+
+position = Vector2( 16, 8 )
+rotation = 1.5708
+_sections_unfolded = [ "Transform" ]
 
 
