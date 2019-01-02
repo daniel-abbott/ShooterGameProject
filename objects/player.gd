@@ -12,6 +12,8 @@ var velocity = Vector2()
 var direction = Vector2()
 var in_menus = false
 
+var bullet_packed = preload("res://objects/bullet.tscn")
+
 func set_processes(value):
 	set_process(value)
 	set_physics_process(value)
@@ -78,7 +80,7 @@ func player_weapon(delta):
 	if Input.is_action_pressed("fire"):
 		fire_rate -= delta
 		if fire_rate == BASE_FIRE_RATE - delta:
-			var bullet = preload("res://objects/bullet.tscn").instance()
+			var bullet = bullet_packed.instance()
 			bullet.position = $muzzle.global_position
 			bullet.linear_velocity = Vector2(0, -$muzzle.position.x * BULLET_VELOCITY).rotated($muzzle.global_rotation)
 			bullet.rotation = self.rotation
