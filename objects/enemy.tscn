@@ -20,7 +20,7 @@ animations = [ {
 custom_solver_bias = 0.0
 radius = 16.0
 
-[node name="enemy" type="KinematicBody2D" index="0"]
+[node name="enemy" type="KinematicBody2D"]
 
 z_index = 1
 input_pickable = false
@@ -41,7 +41,7 @@ rotation = 1.5708
 scale = Vector2( 4, 4 )
 frames = SubResource( 1 )
 animation = "default"
-frame = 3
+frame = 2
 playing = true
 _sections_unfolded = [ "Transform" ]
 
