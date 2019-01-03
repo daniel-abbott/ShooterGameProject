@@ -1,24 +1,38 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://objects/player.gd" type="Script" id=1]
 [ext_resource path="res://sprites/player/TopDownPixelCharacter0000.png" type="Texture" id=2]
-[ext_resource path="res://sprites/player/TopDownPixelCharacter0001.png" type="Texture" id=3]
-[ext_resource path="res://sprites/player/TopDownPixelCharacter0002.png" type="Texture" id=4]
-[ext_resource path="res://sprites/player/TopDownPixelCharacter0003.png" type="Texture" id=5]
-[ext_resource path="res://sprites/light.png" type="Texture" id=6]
+[ext_resource path="res://sprites/player/TopDownPixelCharacter_NoGun0000.png" type="Texture" id=3]
+[ext_resource path="res://sprites/player/TopDownPixelCharacter_NoGun0001.png" type="Texture" id=4]
+[ext_resource path="res://sprites/player/TopDownPixelCharacter_NoGun0002.png" type="Texture" id=5]
+[ext_resource path="res://sprites/player/TopDownPixelCharacter_NoGun0003.png" type="Texture" id=6]
+[ext_resource path="res://sprites/player/TopDownPixelCharacter0001.png" type="Texture" id=7]
+[ext_resource path="res://sprites/player/TopDownPixelCharacter0002.png" type="Texture" id=8]
+[ext_resource path="res://sprites/player/TopDownPixelCharacter0003.png" type="Texture" id=9]
+[ext_resource path="res://sprites/light.png" type="Texture" id=10]
 
 [sub_resource type="SpriteFrames" id=1]
 
 animations = [ {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
-"name": "Idle",
+"name": "Rifle_Idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
 "loop": true,
-"name": "Walking",
+"name": "Default_Walk",
 "speed": 6.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "Rifle_Walk",
+"speed": 6.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "Default_Idle",
+"speed": 5.0
 } ]
 
 [sub_resource type="CircleShape2D" id=2]
@@ -26,7 +40,7 @@ animations = [ {
 custom_solver_bias = 0.0
 radius = 16.0
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" index="0"]
 
 input_pickable = false
 collision_layer = 1
@@ -45,7 +59,7 @@ deadzone = 0.3
 rotation = 1.5708
 scale = Vector2( 4, 4 )
 frames = SubResource( 1 )
-animation = "Idle"
+animation = "Default_Idle"
 _sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
@@ -82,7 +96,7 @@ _sections_unfolded = [ "Drag Margin", "Limit", "Smoothing", "Visibility" ]
 
 enabled = true
 editor_only = false
-texture = ExtResource( 6 )
+texture = ExtResource( 10 )
 offset = Vector2( 0, 0 )
 texture_scale = 3.0
 color = Color( 1, 1, 1, 1 )

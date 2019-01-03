@@ -2,17 +2,27 @@ extends KinematicBody2D
 
 export (int) var speed = 110
 export (float) var deadzone = 0.3
-const BULLET_VELOCITY = 30
-const BASE_FIRE_RATE = 0.1
-var fire_rate = BASE_FIRE_RATE
+var fire_rate = 0
 var aiming = false
-var beam_color = "00000000"
-var firing = false
+var beam_color_inactive = "00000000"
+var beam_color = beam_color_inactive
+# var firing = false
 var velocity = Vector2()
 var direction = Vector2()
 var in_menus = false
 
-var bullet_packed = preload("res://objects/bullet.tscn")
+var potential_pickup
+var current_weapon = null
+
+var current_anims = {
+	idle = "Default_Idle",
+	walk = "Default_Walk"
+	}
+
+var ammo_carried = {
+	bullets = 0,
+	shells = 0
+	}
 
 func set_processes(value):
 	set_process(value)
@@ -29,13 +39,16 @@ func _unhandled_input(event):
 			set_processes(false)
 		else:
 			set_processes(true)
-		
+
+	if event.is_action_pressed("use") && !event.is_echo():
+		get_potential_pickup()
+
 func _draw():
-	if aiming:
-		beam_color = "88ff0000"
+	if aiming and current_weapon:
+		beam_color = current_weapon.beam_color
 		draw_line($muzzle.position, Vector2(1000, 0), beam_color, 1, true)
 	else:
-		beam_color = "00000000"
+		beam_color = beam_color_inactive
 
 func player_movement():
 	velocity = Vector2(Input.get_joy_axis(0, JOY_ANALOG_LX), Input.get_joy_axis(0, JOY_ANALOG_LY))
@@ -69,27 +82,72 @@ func player_movement():
 		
 	if velocity.length() > deadzone:
 		velocity = velocity.normalized() * speed
-		$AnimatedSprite.play("Walking")
+		$AnimatedSprite.play(current_anims.walk)
 	else:
 		velocity = Vector2()
-		$AnimatedSprite.play("Idle")
-	
+		$AnimatedSprite.play(current_anims.idle)
+
 	move_and_slide(velocity)
 
 func player_weapon(delta):
-	if Input.is_action_pressed("fire"):
-		fire_rate -= delta
-		if fire_rate == BASE_FIRE_RATE - delta:
-			var bullet = bullet_packed.instance()
-			bullet.position = $muzzle.global_position
-			bullet.linear_velocity = Vector2(0, -$muzzle.position.x * BULLET_VELOCITY).rotated($muzzle.global_rotation)
-			bullet.rotation = self.rotation
-			bullet.add_collision_exception_with(self)
-			get_parent().add_child(bullet)
-		elif fire_rate <= 0:
-			fire_rate = BASE_FIRE_RATE
-	else:
-		fire_rate = BASE_FIRE_RATE
+	if current_weapon:
+		if Input.is_action_pressed("fire"):
+			fire_rate -= delta
+			if fire_rate == current_weapon.fire_rate - delta:
+				var bullet = current_weapon.projectile.instance()
+				bullet.position = $muzzle.global_position
+				bullet.linear_velocity = Vector2(0, -$muzzle.position.x * current_weapon.projectile_velocity).rotated($muzzle.global_rotation)
+				bullet.rotation = self.rotation
+				bullet.add_collision_exception_with(self)
+				get_tree().get_root().add_child(bullet)
+			elif fire_rate <= 0:
+				fire_rate = current_weapon.fire_rate
+		else:
+			fire_rate = current_weapon.fire_rate
+
+func add_potential_pickup(pickup):
+	potential_pickup = pickup
+
+func get_potential_pickup():
+	if potential_pickup:
+		match potential_pickup.item_type:
+			"weapon":
+				collect_weapon(potential_pickup)
+			"ammo":
+				pass
+			"health":
+				pass
+			"key":
+				pass
+			"treasure":
+				pass
+			_:
+				pass
+		potential_pickup.remove()
+
+func clear_potential_pickup():
+	potential_pickup = null
+
+func collect_weapon(weapon):
+	# var old_weapon = current_weapon # so the old weapon can be dropped onto the map
+	current_weapon = weapon.item_stats
+	fire_rate = current_weapon.fire_rate
+	match current_weapon.weapon_type:
+		"rifle":
+			current_anims = {
+				idle = "Rifle_Idle",
+				walk = "Rifle_Walk"
+				}
+		"pistol":
+			current_anims = {
+				idle = "Pistol_Idle",
+				walk = "Pistol_Walk"
+				}
+		_:
+			current_anims = {
+				idle = "Default_Idle",
+				walk = "Default_Walk"
+				}
 
 func _physics_process(delta):
 	update() #updates canvas drawing, in this case the laser sight
