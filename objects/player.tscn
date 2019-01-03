@@ -42,12 +42,13 @@ radius = 16.0
 
 [node name="Player" type="KinematicBody2D" index="0"]
 
+z_index = 2
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
-_sections_unfolded = [ "collision" ]
+_sections_unfolded = [ "Z Index", "collision" ]
 __meta__ = {
 "_edit_group_": true
 }
