@@ -12,12 +12,15 @@ var direction = Vector2()
 var in_menus = false
 
 var potential_pickup
-var current_weapon = null
+var current_weapon
 
 var current_anims = {
 	idle = "Default_Idle",
 	walk = "Default_Walk"
 	}
+
+var weapon_index = 0
+var weapons_carried = []
 
 var ammo_carried = {
 	bullets = 0,
@@ -31,8 +34,9 @@ func set_processes(value):
 func _ready():
 	set_processes(true)
 	set_process_unhandled_input(true)
-	
+
 func _unhandled_input(event):
+	get_tree().set_input_as_handled()
 	if event.is_action_pressed("ui_cancel") && !event.is_echo():
 		in_menus = !in_menus
 		if in_menus:
@@ -42,6 +46,56 @@ func _unhandled_input(event):
 
 	if event.is_action_pressed("use") && !event.is_echo():
 		get_potential_pickup()
+
+	if event.is_action_pressed("weapons_up") && !event.is_echo():
+		weapon_scroll("up")
+
+	if event.is_action_pressed("weapons_down") && !event.is_echo():
+		weapon_scroll("down")
+
+	if event is InputEventKey:
+		if event.pressed:
+			match event.scancode:
+				KEY_I:
+					for weapon in weapons_carried:
+						print(weapon.weapon_name)
+
+func weapon_scroll(dir):
+	if weapons_carried.size() > 0:
+		match dir:
+			"up":
+				if weapon_index < (weapons_carried.size() - 1):
+					weapon_index += 1
+				else:
+					weapon_index = 0
+			"down":
+				if weapon_index > 0:
+					weapon_index -= 1
+				else:
+					weapon_index = (weapons_carried.size() - 1)
+			_:
+				pass
+		equip_weapon(weapons_carried[weapon_index])
+
+func equip_weapon(weapon):
+	current_weapon = weapon
+	fire_rate = current_weapon.fire_rate
+	match current_weapon.weapon_type:
+		"rifle":
+			current_anims = {
+				idle = "Rifle_Idle",
+				walk = "Rifle_Walk"
+				}
+		"pistol":
+			current_anims = {
+				idle = "Pistol_Idle",
+				walk = "Pistol_Walk"
+				}
+		_:
+			current_anims = {
+				idle = "Default_Idle",
+				walk = "Default_Walk"
+				}
 
 func _draw():
 	if aiming and current_weapon:
@@ -53,7 +107,7 @@ func _draw():
 func player_movement():
 	velocity = Vector2(Input.get_joy_axis(0, JOY_ANALOG_LX), Input.get_joy_axis(0, JOY_ANALOG_LY))
 	direction = Vector2(Input.get_joy_axis(0, JOY_ANALOG_RX), Input.get_joy_axis(0, JOY_ANALOG_RY))
-	
+
 	if direction.length() > deadzone:
 		aiming = true
 		look_at(direction + position)
@@ -65,7 +119,7 @@ func player_movement():
 	else:
 		aiming = false
 		$Camera2D.offset = Vector2(0, 0)
-	
+
 	# TODO: convert keyboard controls to global axis
 	if Input.is_action_pressed("move_right"):
 		velocity.x += 1
@@ -79,7 +133,7 @@ func player_movement():
 	elif Input.is_action_pressed("move_down"):
 		velocity.y += 1
 		look_at(velocity + position)
-		
+
 	if velocity.length() > deadzone:
 		velocity = velocity.normalized() * speed
 		$AnimatedSprite.play(current_anims.walk)
@@ -110,9 +164,9 @@ func add_potential_pickup(pickup):
 
 func get_potential_pickup():
 	if potential_pickup:
-		match potential_pickup.item_type:
+		match potential_pickup.item_stats.type:
 			"weapon":
-				collect_weapon(potential_pickup)
+				collect_weapon(potential_pickup.item_stats)
 			"ammo":
 				pass
 			"health":
@@ -129,25 +183,11 @@ func clear_potential_pickup():
 	potential_pickup = null
 
 func collect_weapon(weapon):
-	# var old_weapon = current_weapon # so the old weapon can be dropped onto the map
-	current_weapon = weapon.item_stats
-	fire_rate = current_weapon.fire_rate
-	match current_weapon.weapon_type:
-		"rifle":
-			current_anims = {
-				idle = "Rifle_Idle",
-				walk = "Rifle_Walk"
-				}
-		"pistol":
-			current_anims = {
-				idle = "Pistol_Idle",
-				walk = "Pistol_Walk"
-				}
-		_:
-			current_anims = {
-				idle = "Default_Idle",
-				walk = "Default_Walk"
-				}
+	if weapons_carried.size() < 1:
+		weapons_carried.append(weapon)
+		equip_weapon(weapons_carried[0])
+	else:
+		weapons_carried.append(weapon)
 
 func _physics_process(delta):
 	update() #updates canvas drawing, in this case the laser sight

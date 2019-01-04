@@ -1,8 +1,8 @@
 extends "res://scripts/ItemPickup.gd"
 
 func _ready():
-	item_type = "weapon"
 	item_stats = {
+		type = "weapon", # weapon, ammo, health, treasure, key, etc.
 		weapon_name = "Autorifle",
 		weapon_type = "rifle", # rifle or pistol, for player sprite
 		ammo_type = "bullets", # bullets, shells, etc.

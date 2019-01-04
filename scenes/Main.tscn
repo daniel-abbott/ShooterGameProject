@@ -91,8 +91,9 @@ _sections_unfolded = [ "Visibility" ]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." index="0"]
 
+z_index = 10
 color = Color( 0, 0, 0, 1 )
-_sections_unfolded = [ "Visibility" ]
+_sections_unfolded = [ "Visibility", "Z Index" ]
 
 [node name="TileMap" type="TileMap" parent="." index="1"]
 
@@ -293,7 +294,7 @@ speed = 150
 
 [node name="Rifle" parent="." index="12" instance=ExtResource( 4 )]
 
-position = Vector2( 496.986, 208.166 )
+position = Vector2( 496, 208 )
 
 [node name="player" parent="." index="13" instance=ExtResource( 5 )]
 

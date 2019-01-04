@@ -3,7 +3,6 @@
 extends Area2D
 
 # Player object will recognize "weapon" right now
-var item_type
 var item_stats
 
 func _ready():
