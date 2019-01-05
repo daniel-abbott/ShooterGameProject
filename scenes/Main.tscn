@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://tilesets/TestTileset.tres" type="TileSet" id=1]
 [ext_resource path="res://sprites/light.png" type="Texture" id=2]
 [ext_resource path="res://objects/enemy.tscn" type="PackedScene" id=3]
 [ext_resource path="res://objects/RiflePickup.tscn" type="PackedScene" id=4]
-[ext_resource path="res://objects/player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://objects/ShotgunPickup.tscn" type="PackedScene" id=5]
+[ext_resource path="res://objects/player.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Environment" id=1]
 
@@ -85,7 +86,7 @@ adjustment_contrast = 1.0
 adjustment_saturation = 1.0
 _sections_unfolded = [ "Glow", "Glow/levels" ]
 
-[node name="Root" type="Node2D" index="0"]
+[node name="Root" type="Node2D"]
 
 _sections_unfolded = [ "Visibility" ]
 
@@ -294,14 +295,18 @@ speed = 150
 
 [node name="Rifle" parent="." index="12" instance=ExtResource( 4 )]
 
-position = Vector2( 496, 208 )
+position = Vector2( 464, 272 )
 
-[node name="player" parent="." index="13" instance=ExtResource( 5 )]
+[node name="Shotgun" parent="." index="13" instance=ExtResource( 5 )]
+
+position = Vector2( 560, 272 )
+
+[node name="player" parent="." index="14" instance=ExtResource( 6 )]
 
 position = Vector2( 512, 320 )
 _sections_unfolded = [ "Visibility", "Z Index", "collision" ]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="14"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="15"]
 
 environment = SubResource( 1 )
 
