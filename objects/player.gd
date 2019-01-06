@@ -76,6 +76,7 @@ func weapon_scroll(dir):
 			_:
 				pass
 		equip_weapon(weapons_carried[weapon_index])
+	$GUI/Container/WeaponList.select(weapon_index)
 
 func equip_weapon(weapon):
 	current_weapon = weapon
@@ -183,9 +184,11 @@ func clear_potential_pickup():
 	potential_pickup = null
 
 func collect_weapon(weapon):
+	$GUI/Container/WeaponList.add_item(weapon.weapon_name, null, true)
 	if weapons_carried.size() < 1:
 		weapons_carried.append(weapon)
 		equip_weapon(weapons_carried[0])
+		$GUI/Container/WeaponList.select(0)
 	else:
 		weapons_carried.append(weapon)
 
