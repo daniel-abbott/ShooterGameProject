@@ -80,6 +80,6 @@ select_mode = 0
 allow_reselect = false
 icon_mode = 1
 fixed_icon_size = Vector2( 0, 0 )
-_sections_unfolded = [ "Hint", "Mouse", "custom_styles" ]
+_sections_unfolded = [ "Columns", "Hint", "Icon", "Mouse", "custom_styles" ]
 
 

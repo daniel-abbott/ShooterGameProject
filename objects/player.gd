@@ -47,10 +47,10 @@ func _unhandled_input(event):
 	if event.is_action_pressed("use") && !event.is_echo():
 		get_potential_pickup()
 
-	if event.is_action_pressed("weapons_up") && !event.is_echo():
+	if event.is_action_pressed("ui_up"):
 		weapon_scroll("up")
 
-	if event.is_action_pressed("weapons_down") && !event.is_echo():
+	if event.is_action_pressed("ui_down"):
 		weapon_scroll("down")
 
 	if event is InputEventKey:
@@ -63,20 +63,20 @@ func _unhandled_input(event):
 func weapon_scroll(dir):
 	if weapons_carried.size() > 0:
 		match dir:
-			"up":
+			"down":
 				if weapon_index < (weapons_carried.size() - 1):
 					weapon_index += 1
 				else:
 					weapon_index = 0
-			"down":
-				if weapon_index > 0:
-					weapon_index -= 1
-				else:
+			"up":
+				if weapon_index <= 0:
 					weapon_index = (weapons_carried.size() - 1)
+				else:
+					weapon_index -= 1
 			_:
 				pass
 		equip_weapon(weapons_carried[weapon_index])
-	$GUI/Container/WeaponList.select(weapon_index)
+		$GUI/Container/WeaponList.select(weapon_index)
 
 func equip_weapon(weapon):
 	current_weapon = weapon

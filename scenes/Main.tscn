@@ -86,7 +86,7 @@ adjustment_contrast = 1.0
 adjustment_saturation = 1.0
 _sections_unfolded = [ "Glow", "Glow/levels" ]
 
-[node name="Root" type="Node2D"]
+[node name="Root" type="Node2D" index="0"]
 
 _sections_unfolded = [ "Visibility" ]
 
@@ -297,16 +297,24 @@ speed = 150
 
 position = Vector2( 464, 272 )
 
-[node name="Shotgun" parent="." index="13" instance=ExtResource( 5 )]
+[node name="Rifle2" parent="." index="13" instance=ExtResource( 4 )]
+
+position = Vector2( 464, 339 )
+
+[node name="Shotgun" parent="." index="14" instance=ExtResource( 5 )]
 
 position = Vector2( 560, 272 )
 
-[node name="player" parent="." index="14" instance=ExtResource( 6 )]
+[node name="Shotgun2" parent="." index="15" instance=ExtResource( 5 )]
+
+position = Vector2( 560, 339 )
+
+[node name="player" parent="." index="16" instance=ExtResource( 6 )]
 
 position = Vector2( 512, 320 )
 _sections_unfolded = [ "Visibility", "Z Index", "collision" ]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="15"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="17"]
 
 environment = SubResource( 1 )
 
