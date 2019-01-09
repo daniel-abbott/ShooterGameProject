@@ -1,10 +1,7 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://console/Console.gd" type="Script" id=1]
-[ext_resource path="res://assets/fonts/RobotoMono/RobotoMono-BoldItalic.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://assets/fonts/RobotoMono/RobotoMono-Italic.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://assets/fonts/RobotoMono/RobotoMono-Bold.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://assets/fonts/RobotoMono/RobotoMono-Regular.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://assets/fonts/visitor/visitor1.ttf" type="DynamicFontData" id=2]
 
 [sub_resource type="Animation" id=1]
 
@@ -59,36 +56,13 @@ _sections_unfolded = [ "Content Margin", "Resource" ]
 
 [sub_resource type="DynamicFont" id=4]
 
-size = 8
+size = 10
 use_mipmaps = false
 use_filter = false
 font_data = ExtResource( 2 )
-_sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
-
-[sub_resource type="DynamicFont" id=5]
-
-size = 16
-use_mipmaps = false
-use_filter = false
-font_data = ExtResource( 3 )
-
-[sub_resource type="DynamicFont" id=6]
-
-size = 8
-use_mipmaps = false
-use_filter = false
-font_data = ExtResource( 4 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[sub_resource type="DynamicFont" id=7]
-
-size = 8
-use_mipmaps = false
-use_filter = false
-font_data = ExtResource( 5 )
-_sections_unfolded = [ "Settings" ]
-
-[sub_resource type="StyleBoxFlat" id=8]
+[sub_resource type="StyleBoxFlat" id=5]
 
 content_margin_left = -1.0
 content_margin_right = -1.0
@@ -115,14 +89,15 @@ shadow_color = Color( 0, 0, 0, 0.6 )
 shadow_size = 0
 anti_aliasing = false
 anti_aliasing_size = 1
+_sections_unfolded = [ "Anti Aliasing" ]
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=6]
 
-size = 8
+size = 10
 use_mipmaps = false
 use_filter = false
-font_data = ExtResource( 5 )
-_sections_unfolded = [ "Font", "Resource", "Settings" ]
+font_data = ExtResource( 2 )
+_sections_unfolded = [ "Font/fallback", "Settings" ]
 
 [node name="Console" type="CanvasLayer" index="0"]
 
@@ -188,7 +163,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 320.0
-margin_bottom = 64.0
+margin_bottom = 67.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = true
 focus_neighbour_left = NodePath("../LineEdit")
@@ -203,10 +178,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/focus = SubResource( 2 )
 custom_styles/normal = SubResource( 3 )
-custom_fonts/bold_italics_font = SubResource( 4 )
-custom_fonts/italics_font = SubResource( 5 )
-custom_fonts/bold_font = SubResource( 6 )
-custom_fonts/normal_font = SubResource( 7 )
+custom_fonts/normal_font = SubResource( 4 )
 custom_constants/line_separation = 4
 bbcode_enabled = true
 bbcode_text = ""
@@ -228,7 +200,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 68.0
+margin_top = 71.0
 margin_right = 320.0
 margin_bottom = 90.0
 rect_pivot_offset = Vector2( 0, 0 )
@@ -244,8 +216,8 @@ mouse_filter = 0
 mouse_default_cursor_shape = 1
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_styles/focus = SubResource( 8 )
-custom_fonts/font = SubResource( 9 )
+custom_styles/focus = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 text = "ADFDAS"
 focus_mode = 2
 context_menu_enabled = true

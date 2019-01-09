@@ -1,16 +1,9 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://gui/GUI.gd" type="Script" id=1]
-[ext_resource path="res://assets/fonts/RobotoMono/RobotoMono-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/fonts/visitor/visitor1.ttf" type="DynamicFontData" id=2]
 
-[sub_resource type="StyleBoxEmpty" id=3]
-
-content_margin_left = -1.0
-content_margin_right = -1.0
-content_margin_top = -1.0
-content_margin_bottom = -1.0
-
-[sub_resource type="StyleBoxEmpty" id=4]
+[sub_resource type="StyleBoxEmpty" id=1]
 
 content_margin_left = -1.0
 content_margin_right = -1.0
@@ -24,15 +17,22 @@ content_margin_right = -1.0
 content_margin_top = -1.0
 content_margin_bottom = -1.0
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="StyleBoxEmpty" id=3]
 
-size = 6
+content_margin_left = -1.0
+content_margin_right = -1.0
+content_margin_top = -1.0
+content_margin_bottom = -1.0
+
+[sub_resource type="DynamicFont" id=4]
+
+size = 10
 use_mipmaps = false
 use_filter = false
 font_data = ExtResource( 2 )
-_sections_unfolded = [ "Resource", "Settings" ]
+_sections_unfolded = [ "Font", "Resource", "Settings" ]
 
-[node name="GUI" type="CanvasLayer" index="0"]
+[node name="GUI" type="CanvasLayer"]
 
 layer = 1
 offset = Vector2( 0, 0 )
@@ -71,15 +71,15 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_styles/bg_focus = SubResource( 3 )
-custom_styles/selected = SubResource( 4 )
-custom_styles/bg = SubResource( 2 )
-custom_fonts/font = SubResource( 1 )
+custom_styles/bg_focus = SubResource( 1 )
+custom_styles/selected = SubResource( 2 )
+custom_styles/bg = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 items = [  ]
 select_mode = 0
 allow_reselect = false
 icon_mode = 1
 fixed_icon_size = Vector2( 0, 0 )
-_sections_unfolded = [ "Columns", "Hint", "Icon", "Mouse", "custom_styles" ]
+_sections_unfolded = [ "Columns", "Hint", "Icon", "Mouse", "custom_fonts", "custom_styles" ]
 
 
