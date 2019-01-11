@@ -154,7 +154,7 @@ func player_weapon(delta):
 				bullet.linear_velocity = Vector2(0, -$muzzle.position.x * current_weapon.projectile_velocity).rotated($muzzle.global_rotation)
 				bullet.rotation = self.rotation
 				bullet.add_collision_exception_with(self)
-				get_tree().get_root().add_child(bullet)
+				get_tree().get_current_scene().add_child(bullet)
 			elif fire_rate <= 0:
 				fire_rate = current_weapon.fire_rate
 		else:
