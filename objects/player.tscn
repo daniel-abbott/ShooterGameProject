@@ -2,13 +2,13 @@
 
 [ext_resource path="res://objects/player.gd" type="Script" id=1]
 [ext_resource path="res://sprites/player/TopDownPixelCharacter0000.png" type="Texture" id=2]
-[ext_resource path="res://sprites/player/TopDownPixelCharacter0001.png" type="Texture" id=3]
-[ext_resource path="res://sprites/player/TopDownPixelCharacter0002.png" type="Texture" id=4]
-[ext_resource path="res://sprites/player/TopDownPixelCharacter0003.png" type="Texture" id=5]
-[ext_resource path="res://sprites/player/TopDownPixelCharacter_NoGun0000.png" type="Texture" id=6]
-[ext_resource path="res://sprites/player/TopDownPixelCharacter_NoGun0001.png" type="Texture" id=7]
-[ext_resource path="res://sprites/player/TopDownPixelCharacter_NoGun0002.png" type="Texture" id=8]
-[ext_resource path="res://sprites/player/TopDownPixelCharacter_NoGun0003.png" type="Texture" id=9]
+[ext_resource path="res://sprites/player/TopDownPixelCharacter_NoGun0000.png" type="Texture" id=3]
+[ext_resource path="res://sprites/player/TopDownPixelCharacter_NoGun0001.png" type="Texture" id=4]
+[ext_resource path="res://sprites/player/TopDownPixelCharacter_NoGun0002.png" type="Texture" id=5]
+[ext_resource path="res://sprites/player/TopDownPixelCharacter_NoGun0003.png" type="Texture" id=6]
+[ext_resource path="res://sprites/player/TopDownPixelCharacter0001.png" type="Texture" id=7]
+[ext_resource path="res://sprites/player/TopDownPixelCharacter0002.png" type="Texture" id=8]
+[ext_resource path="res://sprites/player/TopDownPixelCharacter0003.png" type="Texture" id=9]
 [ext_resource path="res://sprites/light.png" type="Texture" id=10]
 [ext_resource path="res://gui/GUI.tscn" type="PackedScene" id=11]
 
@@ -20,17 +20,17 @@ animations = [ {
 "name": "Rifle_Idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
-"loop": true,
-"name": "Rifle_Walk",
-"speed": 6.0
-}, {
-"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
 "loop": true,
 "name": "Default_Walk",
 "speed": 6.0
 }, {
-"frames": [ ExtResource( 6 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "Rifle_Walk",
+"speed": 6.0
+}, {
+"frames": [ ExtResource( 3 ) ],
 "loop": true,
 "name": "Default_Idle",
 "speed": 5.0
@@ -41,7 +41,7 @@ animations = [ {
 custom_solver_bias = 0.0
 radius = 16.0
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" index="0"]
 
 z_index = 2
 input_pickable = false
@@ -119,10 +119,14 @@ shadow_filter_smooth = 1.0
 shadow_item_cull_mask = 1
 _sections_unfolded = [ "Range", "Shadow" ]
 
-[node name="muzzle" type="Position2D" parent="." index="3"]
+[node name="muzzle" type="RayCast2D" parent="." index="3"]
 
 position = Vector2( 16, 8 )
 rotation = 1.5708
+enabled = true
+exclude_parent = true
+cast_to = Vector2( 0, -500 )
+collision_mask = 1
 _sections_unfolded = [ "Transform" ]
 
 [node name="GUI" parent="." index="4" instance=ExtResource( 11 )]

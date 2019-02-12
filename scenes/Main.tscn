@@ -86,7 +86,7 @@ adjustment_contrast = 1.0
 adjustment_saturation = 1.0
 _sections_unfolded = [ "Glow", "Glow/levels" ]
 
-[node name="Root" type="Node2D" index="0"]
+[node name="Root" type="Node2D"]
 
 _sections_unfolded = [ "Visibility" ]
 

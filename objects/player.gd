@@ -101,7 +101,7 @@ func equip_weapon(weapon):
 func _draw():
 	if aiming and current_weapon:
 		beam_color = current_weapon.beam_color
-		draw_line($muzzle.position, Vector2(1000, 0), beam_color, 1, true)
+		draw_line($muzzle.position, to_local($muzzle.get_collision_point()) if $muzzle.is_colliding() else Vector2(1000, 0), beam_color, 1, true)
 	else:
 		beam_color = beam_color_inactive
 
