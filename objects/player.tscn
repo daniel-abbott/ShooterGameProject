@@ -13,7 +13,6 @@
 [ext_resource path="res://gui/GUI.tscn" type="PackedScene" id=11]
 
 [sub_resource type="SpriteFrames" id=1]
-
 animations = [ {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
@@ -25,110 +24,63 @@ animations = [ {
 "name": "Default_Walk",
 "speed": 6.0
 }, {
-"frames": [ ExtResource( 2 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
-"loop": true,
-"name": "Rifle_Walk",
-"speed": 6.0
-}, {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
 "name": "Default_Idle",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "Rifle_Walk",
+"speed": 6.0
 } ]
 
 [sub_resource type="CircleShape2D" id=2]
-
-custom_solver_bias = 0.0
 radius = 16.0
 
-[node name="Player" type="KinematicBody2D" index="0"]
-
+[node name="Player" type="KinematicBody2D"]
 z_index = 2
-input_pickable = false
-collision_layer = 1
-collision_mask = 1
-collision/safe_margin = 0.08
 script = ExtResource( 1 )
-_sections_unfolded = [ "Z Index", "collision" ]
 __meta__ = {
 "_edit_group_": true
 }
-speed = 110
-deadzone = 0.3
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="0"]
-
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 rotation = 1.5708
 scale = Vector2( 4, 4 )
 frames = SubResource( 1 )
 animation = "Default_Idle"
-_sections_unfolded = [ "Transform" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
-
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
 
-[node name="Camera2D" type="Camera2D" parent="." index="2"]
-
-anchor_mode = 1
-rotating = false
+[node name="Camera2D" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 2, 2 )
-limit_left = -10000000
-limit_top = -10000000
-limit_right = 10000000
-limit_bottom = 10000000
 limit_smoothed = true
-drag_margin_h_enabled = true
-drag_margin_v_enabled = true
 smoothing_enabled = true
 smoothing_speed = 2.0
-offset_v = 0.0
-offset_h = 0.0
 drag_margin_left = 0.03
 drag_margin_top = 0.02
 drag_margin_right = 0.03
 drag_margin_bottom = 0.02
-editor_draw_screen = true
-editor_draw_limits = false
-editor_draw_drag_margin = false
-_sections_unfolded = [ "Drag Margin", "Limit", "Smoothing", "Visibility" ]
 
-[node name="Light2D" type="Light2D" parent="Camera2D" index="0"]
-
-enabled = true
-editor_only = false
+[node name="Light2D" type="Light2D" parent="Camera2D"]
 texture = ExtResource( 10 )
-offset = Vector2( 0, 0 )
 texture_scale = 3.0
-color = Color( 1, 1, 1, 1 )
 energy = 0.5
 mode = 2
-range_height = 0.0
-range_z_min = -1024
-range_z_max = 1024
-range_layer_min = 0
-range_layer_max = 0
-range_item_cull_mask = 1
 shadow_enabled = true
 shadow_color = Color( 0, 0, 0, 1 )
-shadow_buffer_size = 2048
 shadow_gradient_length = 1.0
 shadow_filter = 5
 shadow_filter_smooth = 1.0
-shadow_item_cull_mask = 1
-_sections_unfolded = [ "Range", "Shadow" ]
 
-[node name="muzzle" type="RayCast2D" parent="." index="3"]
-
+[node name="muzzle" type="RayCast2D" parent="."]
 position = Vector2( 16, 8 )
 rotation = 1.5708
 enabled = true
-exclude_parent = true
 cast_to = Vector2( 0, -500 )
-collision_mask = 1
-_sections_unfolded = [ "Transform" ]
 
-[node name="GUI" parent="." index="4" instance=ExtResource( 11 )]
-
+[node name="GUI" parent="." instance=ExtResource( 11 )]
 

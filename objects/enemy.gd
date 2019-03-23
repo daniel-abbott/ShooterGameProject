@@ -14,13 +14,14 @@ var state = STATE_MOVING
 func _ready():
 	pass
 
+#warning-ignore:unused_argument
 func _physics_process(delta):
 	if state == STATE_MOVING:
 		if get_node('../player'):
 			target = get_node('../player').get_transform().origin
 			velocity = (target - position).normalized() * speed
 			rotation = velocity.angle()
-			move_and_slide(velocity)
+			velocity = move_and_slide(velocity)
 		else:
 			print('Player not found!')
 

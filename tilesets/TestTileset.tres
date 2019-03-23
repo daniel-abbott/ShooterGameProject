@@ -4,40 +4,37 @@
 [ext_resource path="res://sprites/wall.png" type="Texture" id=2]
 
 [sub_resource type="OccluderPolygon2D" id=1]
-
-closed = true
-cull_mode = 0
 polygon = PoolVector2Array( -16, -16, -16, 16, 16, 16, 16, -16 )
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
-
-custom_solver_bias = 0.0
 points = PoolVector2Array( -18, 17, -18, -17, 16, -17, 16, 17 )
 
 [resource]
-
 0/name = "testfloor"
 0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 32, 32 )
-0/is_autotile = false
+0/tile_mode = 0
 0/occluder_offset = Vector2( 16, 16 )
 0/navigation_offset = Vector2( 16, 16 )
 0/shapes = [  ]
+0/z_index = 0
 1/name = "testwall"
 1/texture = ExtResource( 2 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )
 1/region = Rect2( 0, 0, 32, 32 )
-1/is_autotile = false
+1/tile_mode = 0
 1/occluder_offset = Vector2( 16, 16 )
 1/occluder = SubResource( 1 )
 1/navigation_offset = Vector2( 16, 16 )
 1/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
+"one_way_margin": 1.0,
 "shape": SubResource( 2 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 17, 16 )
 } ]
+1/z_index = 0
 

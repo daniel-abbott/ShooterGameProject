@@ -142,7 +142,7 @@ func player_movement():
 		velocity = Vector2()
 		$AnimatedSprite.play(current_anims.idle)
 
-	move_and_slide(velocity)
+	velocity = move_and_slide(velocity)
 
 func player_weapon(delta):
 	if current_weapon:
