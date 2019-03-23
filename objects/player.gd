@@ -53,6 +53,17 @@ func _unhandled_input(event):
 	if event.is_action_pressed("ui_down"):
 		weapon_scroll("down")
 
+	if event.is_action_pressed("mouse_aim"):
+		aiming = true
+	elif event.is_action_released("mouse_aim"):
+		aiming = false
+
+	if aiming and InputEventMouseMotion:
+		look_at(get_global_mouse_position())
+		$Camera2D.offset = (get_global_mouse_position() - self.get_transform().get_origin()) / 8
+	else:
+		$Camera2D.offset = Vector2(0, 0)
+
 	if event is InputEventKey:
 		if event.pressed:
 			match event.scancode:
@@ -117,23 +128,27 @@ func player_movement():
 		aiming = false
 		look_at(velocity + position)
 		$Camera2D.offset = Vector2(0, 0)
-	else:
-		aiming = false
-		$Camera2D.offset = Vector2(0, 0)
+#	else:
+#		aiming = false
+#		$Camera2D.offset = Vector2(0, 0)
 
-	# TODO: convert keyboard controls to global axis
+	# TODO: clean this up so there isn't so much repeated code
 	if Input.is_action_pressed("move_right"):
 		velocity.x += 1
-		look_at(velocity + position)
+		if !aiming:
+			look_at(velocity + position)
 	elif Input.is_action_pressed("move_left"):
 		velocity.x -= 1
-		look_at(velocity + position)
+		if !aiming:
+			look_at(velocity + position)
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= 1
-		look_at(velocity + position)
+		if !aiming:
+			look_at(velocity + position)
 	elif Input.is_action_pressed("move_down"):
 		velocity.y += 1
-		look_at(velocity + position)
+		if !aiming:
+			look_at(velocity + position)
 
 	if velocity.length() > deadzone:
 		velocity = velocity.normalized() * speed

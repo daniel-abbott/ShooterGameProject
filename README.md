@@ -1,14 +1,18 @@
 # ShooterGameProject
-A simple twin-stick shooter, going for an Alien Breed type of gameplay and atmosphere, with some nice lighting and field-of-sight effects.
+A simple twin-stick shooter, going for an Alien Breed type of gameplay and atmosphere, with some nice lighting and line-of-sight effects.
 
 Requires Godot v3.1.0-stable or higher.
 
 ## Controls
-Best played with a controller, as this is a twin-stick shooter. Mouse+keyboard controls should be implemented sometime as well.
+Best played with a controller, as this is a twin-stick shooter. Mouse+keyboard controls are also available.
 
-* Move - Right analog stick
-* Aim - Left analog stick
-* Fire - Right trigger
+* Move - Right analog stick or keyboard WASD
+* Aim - Left analog stick or right mouse button
+* Fire - Right trigger or left mouse button
+* Pickup Item - Controller A button or keyboard E
+* Scroll Items - Directional pad up/down or mousewheel up/down
+
+Controls are set up in a way that will allow them to be customizable in the future.
 
 ## Features
 * Top-down line-of-sight system (using shadowmaps).
