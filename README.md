@@ -3,6 +3,8 @@ A simple twin-stick shooter, going for an Alien Breed type of gameplay and atmos
 
 Requires Godot v3.1.0-stable or higher.
 
+**If you're using Godot 3.1, check out the [3.1 testing branch](https://github.com/daniel-abbott/ShooterGameProject/tree/3.1-testing).**
+
 ## Controls
 Best played with a controller, as this is a twin-stick shooter. Mouse+keyboard controls are also available.
 
